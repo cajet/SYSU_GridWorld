@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<project name="Jumper" default="junit" basedir=".">
+	<target name="clean">
+		<delete>
+		<fileset dir="Jumper" includes="**/*.class"/>
+		</delete>
+	</target>
+	<target name="compile" depends="clean">
+		<javac srcdir="Jumper" destdir="Jumper" includeantruntime="on">
+		<classpath>
+			<pathelement location=".:./../gridworld.jar"/>
+			<pathelement location=".:./../junit-4.9.jar"/>
+		</classpath>
+		</javac>
+	</target>
+
+	<target name="junit" depends="compile">
+		<junit fork="yes" haltonfailure="yes">
+		<test name="JumperTest"/>
+		<formatter type="plain" usefile="false"/>
+		<classpath>
+		<pathelement path="Jumper"/>
+                <pathelement location=".:./../gridworld.jar"/>
+		<pathelement location=".:./../junit-4.9.jar"/>
+		</classpath>
+		</junit>
+	</target>
+</project>

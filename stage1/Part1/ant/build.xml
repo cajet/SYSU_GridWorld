@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<project name="anttest" default="jar" basedir=".">
+	<target name="clean">
+		<delete dir="build"/>
+	</target>
+	<target name="compile" depends="clean">
+		<mkdir dir="build/classes"/>
+		<javac srcdir="src" destdir="build/classes" includeantruntime="on"/>
+	</target>
+
+	<target name="run" depends="compile">
+		<java classname="calculator" fork="true">
+			<classpath>
+				<pathelement path="build/classes"/>
+			</classpath>
+		</java>
+		<echo message="run successful"/>
+	</target>
+
+	<target name="jar" depends="run">
+		<jar destfile="calculator.jar" basedir="build/classes">
+			<manifest>
+				<attribute name="Main-class" value="calculator"/>
+			</manifest>
+		</jar>
+	</target>
+</project>

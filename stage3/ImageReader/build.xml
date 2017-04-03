@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<project name="bmptest" default="run" basedir=".">
+	<target name="clean">
+		<delete>
+		<fileset dir="." includes="**/*.class"/>
+		</delete>
+	</target>
+	<target name="compile" depends="clean">
+		<javac srcdir="." destdir="." includeantruntime="on">
+		<classpath>
+			<pathelement location=".:./../ImageReader.jar"/>
+			<pathelement location=".:./../junit-4.9.jar"/>
+		</classpath>
+		</javac>
+	</target>
+
+	<target name="run" depends="compile">
+		<java classname="ImageReaderRunner" fork="true">
+		<classpath>
+			<pathelement path="."/>
+                        <pathelement location=".:./../ImageReader.jar"/>
+		</classpath>
+		</java>
+	</target>
+
+	<target name="junit" depends="compile">
+		<junit fork="yes" haltonfailure="yes">
+		<test name="BmpTest"/>
+		<formatter type="plain" usefile="false"/>
+		<classpath>
+		<pathelement path="."/>
+                <pathelement location=".:./../ImageReader.jar"/>
+		<pathelement location=".:./../junit-4.9.jar"/>
+		</classpath>
+		</junit>
+	</target>
+</project>

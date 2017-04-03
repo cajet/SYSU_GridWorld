@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<project name="Critters" default="run" basedir=".">
+	<target name="clean">
+		<delete>
+		<fileset dir="critters" includes="**/*.class"/>
+		</delete>
+	</target>
+	<target name="compile" depends="clean">
+		<javac srcdir="critters" destdir="critters" includeantruntime="on">
+		<classpath>
+			<pathelement location=".:./../../gridworld.jar"/>
+			<pathelement location=".:junit-4.9.jar"/>
+		</classpath>
+		</javac>
+	</target>
+
+	<target name="run" depends="compile">
+		<java classname="Part4Runner" fork="true">
+		<classpath>
+			<pathelement path="critters"/>
+                        <pathelement location=".:./../../gridworld.jar"/>
+		</classpath>
+		</java>
+	</target>
+
+	<target name="junit" depends="compile">
+		<junit fork="yes" haltonfailure="yes">
+		<test name="JumperTest"/>
+		<formatter type="plain" usefile="false"/>
+		<classpath>
+		<pathelement path="Jumper"/>
+                <pathelement location=".:./../../gridworld.jar"/>
+		<pathelement location=".:junit-4.9.jar -ea org.junit.runner.JUnitCore"/>
+		</classpath>
+		</junit>
+	</target>
+</project>
